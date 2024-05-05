@@ -17,8 +17,8 @@ func enter():
 func exit():
 	jumped = false
 
-func update(_delta) -> PlayerState:
-	return null
+func update(_delta):
+	pass
 	
 func physics_update(_delta):
 	if player.is_on_floor():

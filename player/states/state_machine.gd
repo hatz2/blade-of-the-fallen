@@ -24,6 +24,7 @@ func _physics_process(delta):
 	if current_state:
 		current_state.physics_update(delta)
 		
+	# Change to the next state
 	if _new_state:
 		if current_state:
 			current_state.exit()

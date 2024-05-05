@@ -13,8 +13,8 @@ func enter():
 func exit():
 	pass
 
-func update(_delta) -> PlayerState:
-	return null
+func update(_delta):
+	pass
 	
 func physics_update(_delta):
 	var direction = Input.get_axis("run_left", "run_right")
