@@ -3,6 +3,8 @@ extends PlayerState
 
 @export var landing_animation := "landing"
 @export var ground_state: Ground
+@export var air_state: Air
+@export var attack_state: Attacking
 
 func enter():
 	playback.travel(landing_animation)
@@ -18,7 +20,11 @@ func physics_update(_delta):
 	pass
 	
 func handle_input(event : InputEvent):
-	pass
+	if event.is_action_pressed("attack"):
+		transition.emit(attack_state)
+	elif event.is_action_pressed("jump"):
+		air_state.jumped = true
+		transition.emit(air_state)
 
 
 

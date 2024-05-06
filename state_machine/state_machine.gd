@@ -1,14 +1,14 @@
 class_name StateMachine
 extends Node
 
-@export var initial_state: PlayerState
-var current_state: PlayerState = null
-var _new_state: PlayerState = null
+@export var initial_state: State
+var current_state: State = null
+var _new_state: State = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for child in get_children():
-		if child is PlayerState:
+		if child is State:
 			child.transition.connect(on_transition)
 	
 	if initial_state:
@@ -54,5 +54,5 @@ func can_jump() -> bool:
 	return false
 	
 	
-func on_transition(new_state: PlayerState):
+func on_transition(new_state: State):
 	_new_state = new_state

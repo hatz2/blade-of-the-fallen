@@ -32,6 +32,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-func _process(delta):
+func _process(_delta):
 	pass
 

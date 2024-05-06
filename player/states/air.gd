@@ -24,5 +24,5 @@ func physics_update(_delta):
 	if player.is_on_floor():
 		transition.emit(landing_state)
 	
-func handle_input(event : InputEvent):
+func handle_input(_event : InputEvent):
 	pass
