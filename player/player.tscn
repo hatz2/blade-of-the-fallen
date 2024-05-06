@@ -12,9 +12,6 @@
 [ext_resource type="Script" path="res://player/states/attacking.gd" id="10_ajorf"]
 [ext_resource type="Script" path="res://player/debug_label.gd" id="10_g6ufd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4lyu"]
-size = Vector2(19, 48)
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8rb7"]
 animation = &"attack"
 
@@ -78,7 +75,7 @@ states/falling/position = Vector2(225, 55)
 states/idle/node = SubResource("AnimationNodeAnimation_b2vju")
 states/idle/position = Vector2(338, 137)
 states/jump/node = SubResource("AnimationNodeAnimation_7y4bl")
-states/jump/position = Vector2(528, 253)
+states/jump/position = Vector2(529, 254)
 states/landing/node = SubResource("AnimationNodeAnimation_kdl40")
 states/landing/position = Vector2(370, 243)
 states/run/node = SubResource("AnimationNodeAnimation_qo3uo")
@@ -185,12 +182,12 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-48, -40)]
+"values": [Vector2(-40, -40)]
 }
 
 [sub_resource type="Animation" id="Animation_bvr3q"]
 resource_name = "falling"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -222,10 +219,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [8, 9, 10, 11]
+"values": [8, 9, 10]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -237,7 +234,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-32, -40)]
+"values": [Vector2(-32, -32)]
 }
 
 [sub_resource type="Animation" id="Animation_a6uky"]
@@ -463,12 +460,12 @@ _data = {
 "run": SubResource("Animation_kolr3")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82u4x"]
+radius = 6.0
+height = 50.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yrp23")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_k4lyu")
-metadata/_edit_group_ = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_bd5c0")
@@ -529,6 +526,10 @@ text = "State
 "
 script = ExtResource("10_g6ufd")
 state_machine = NodePath("../StateMachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_82u4x")
+metadata/_edit_group_ = true
 
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Attacking" method="_on_animation_tree_animation_finished"]
