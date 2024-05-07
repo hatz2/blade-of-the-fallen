@@ -1,10 +1,10 @@
 [gd_scene load_steps=28 format=3 uid="uid://lwdox3loupxq"]
 
-[ext_resource type="Texture2D" uid="uid://113woi6kbiw1" path="res://textures/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Hit-Vanish/Hit-Sheet.png" id="1_f875e"]
-[ext_resource type="Texture2D" uid="uid://datufyi5thwhk" path="res://textures/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Idle/Idle-Sheet.png" id="1_noomr"]
+[ext_resource type="Texture2D" uid="uid://113woi6kbiw1" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Hit-Vanish/Hit-Sheet.png" id="1_f875e"]
+[ext_resource type="Texture2D" uid="uid://datufyi5thwhk" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Idle/Idle-Sheet.png" id="1_noomr"]
 [ext_resource type="Script" path="res://monster/monster.gd" id="1_x7jo7"]
-[ext_resource type="Texture2D" uid="uid://1015p53d038r" path="res://textures/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet.png" id="2_rwokc"]
-[ext_resource type="Texture2D" uid="uid://bisjd50wnmuoa" path="res://textures/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Walk/Walk-Base-Sheet.png" id="3_dpg0l"]
+[ext_resource type="Texture2D" uid="uid://1015p53d038r" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet.png" id="2_rwokc"]
+[ext_resource type="Texture2D" uid="uid://bisjd50wnmuoa" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Walk/Walk-Base-Sheet.png" id="3_dpg0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2jp3"]
 atlas = ExtResource("1_f875e")
