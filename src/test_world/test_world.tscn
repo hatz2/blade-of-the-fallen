@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://c40a3syfdflvo"]
 
 [ext_resource type="Texture2D" uid="uid://b3cyi1uk2rag4" path="res://assets/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="1_driko"]
-[ext_resource type="PackedScene" uid="uid://cve55lkj8fx40" path="res://player/player.tscn" id="2_4yt03"]
-[ext_resource type="PackedScene" uid="uid://lwdox3loupxq" path="res://monster/monster.tscn" id="3_huu0s"]
+[ext_resource type="PackedScene" uid="uid://cve55lkj8fx40" path="res://src/player/player.tscn" id="2_4yt03"]
+[ext_resource type="PackedScene" uid="uid://lwdox3loupxq" path="res://src/monster/monster.tscn" id="3_huu0s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e3gwx"]
 texture = ExtResource("1_driko")
