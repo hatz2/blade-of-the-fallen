@@ -1422,4 +1422,4 @@ position = Vector2(703, 457)
 zoom = Vector2(3, 3)
 
 [node name="Monster" parent="." instance=ExtResource("3_huu0s")]
-position = Vector2(855, 452)
+position = Vector2(868, 543)

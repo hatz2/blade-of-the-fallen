@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cve55lkj8fx40"]
+[gd_scene load_steps=46 format=3 uid="uid://cve55lkj8fx40"]
 
 [ext_resource type="Texture2D" uid="uid://bdygcu6cm3nkc" path="res://assets/Legacy-Fantasy - High Forest 2.3/Character/Attack-01/Attack-01-Sheet.png" id="1_drosy"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_yrp23"]
@@ -67,7 +67,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bd5c0"]
 states/End/position = Vector2(779, 137)
-states/Start/position = Vector2(186, 137)
+states/Start/position = Vector2(185, 137)
 states/attack/node = SubResource("AnimationNodeAnimation_v8rb7")
 states/attack/position = Vector2(457, 42)
 states/falling/node = SubResource("AnimationNodeAnimation_1isu7")
@@ -132,6 +132,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(-32, -40)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitArea/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_5iuqg"]
 resource_name = "attack"
@@ -183,6 +195,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-48, -40)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitArea/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_bvr3q"]
@@ -461,8 +485,11 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_82u4x"]
-radius = 6.0
+radius = 8.0
 height = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gu2"]
+size = Vector2(35, 50)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_yrp23")
@@ -515,7 +542,6 @@ can_jump = false
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="Label" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-visible = false
 offset_left = -13.0
 offset_top = -49.0
 offset_right = 2754.0
@@ -531,5 +557,13 @@ state_machine = NodePath("../StateMachine")
 shape = SubResource("CapsuleShape2D_82u4x")
 metadata/_edit_group_ = true
 
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(26.5, -1)
+shape = SubResource("RectangleShape2D_r0gu2")
+disabled = true
+
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Attacking" method="_on_animation_tree_animation_finished"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

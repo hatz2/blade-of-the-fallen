@@ -36,13 +36,10 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func update_sprite_orientation():
-	var direction := global_position - _last_position
-	print("Position ", global_position)
-	print("Last pos: ", _last_position)
-	print(direction)
-	if (direction.x > 0):
+	var direction := global_position.x - _last_position.x
+	if (direction > 0):
 		sprite.flip_h = true
-	elif direction.x < 0:
+	elif direction < 0:
 		sprite.flip_h = false
 		
 	_last_position = global_position

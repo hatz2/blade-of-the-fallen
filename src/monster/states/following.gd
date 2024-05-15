@@ -33,7 +33,7 @@ func physics_update(_delta):
 	
 	monster_body.velocity = direction_to_move * speed
 	
-	if monster_body.global_position - last_monster_pos == Vector2.ZERO: # we are not moving at all
+	if monster_body.global_position.x - last_monster_pos.x == 0: # we are not moving at all
 		animated_sprite.play("idle")
 	else:
 		animated_sprite.play(follow_animation)

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/monster/monster.gd" id="1_x7jo7"]
 [ext_resource type="Texture2D" uid="uid://1015p53d038r" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet.png" id="2_rwokc"]
 [ext_resource type="Texture2D" uid="uid://bisjd50wnmuoa" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Walk/Walk-Base-Sheet.png" id="3_dpg0l"]
-[ext_resource type="Script" path="res://src/state_machine/state_machine.gd" id="6_6c1yp"]
+[ext_resource type="Script" path="res://src/monster/states/monster_state_machine.gd" id="6_fyg4p"]
 [ext_resource type="Script" path="res://src/monster/states/idle.gd" id="7_g746q"]
 [ext_resource type="Script" path="res://src/monster/states/walking.gd" id="8_7or5b"]
 [ext_resource type="Script" path="res://src/monster/debug_label.gd" id="9_1umje"]
@@ -13,7 +13,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_262s4"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -80, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 3
 
@@ -180,15 +180,15 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vx46o"]
-radius = 12.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60awq"]
+size = Vector2(27.0082, 39.0076)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26osw"]
-size = Vector2(120, 35)
+size = Vector2(200, 30)
 
 [node name="Path2D" type="Path2D"]
 curve = SubResource("Curve2D_262s4")
+metadata/_edit_group_ = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotation = 0.00934552
@@ -204,14 +204,14 @@ animation = &"idle"
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Monster"]
-position = Vector2(-3, 4)
+position = Vector2(-1.48592, 2.51391)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_vx46o")
+shape = SubResource("RectangleShape2D_60awq")
 metadata/_edit_group_ = true
 
 [node name="StateMachine" type="Node" parent="PathFollow2D/Monster" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("6_6c1yp")
-initial_state = NodePath("Idle")
+script = ExtResource("6_fyg4p")
+initial_state = NodePath("Walking")
 
 [node name="Idle" type="Node" parent="PathFollow2D/Monster/StateMachine" node_paths=PackedStringArray("walk_state", "animated_sprite")]
 script = ExtResource("7_g746q")
@@ -247,10 +247,9 @@ script = ExtResource("9_1umje")
 state_machine = NodePath("../StateMachine")
 
 [node name="DetectionArea" type="Area2D" parent="PathFollow2D/Monster"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Monster/DetectionArea"]
-position = Vector2(-2.59335, -0.298833)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_26osw")
 
 [connection signal="timeout" from="PathFollow2D/Monster/StateMachine/Idle/Timer" to="PathFollow2D/Monster/StateMachine/Idle" method="_on_timer_timeout"]

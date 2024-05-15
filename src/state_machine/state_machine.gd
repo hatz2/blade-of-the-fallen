@@ -2,7 +2,6 @@ class_name StateMachine
 extends Node
 
 @export var initial_state: State
-@onready var _follow_state := $Following
 var current_state: State = null
 var _new_state: State = null
 
@@ -57,9 +56,3 @@ func can_jump() -> bool:
 	
 func on_transition(new_state: State):
 	_new_state = new_state
-
-
-func _on_detection_area_body_entered(body):
-	if body is Player:
-		# Change to follow state
-		on_transition(_follow_state)
