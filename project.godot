@@ -51,6 +51,7 @@ attack={
 2d_physics/layer_2="Monsters"
 2d_physics/layer_3="Player"
 2d_physics/layer_4="HitBox"
+2d_physics/layer_5="Coin"
 
 [rendering]
 

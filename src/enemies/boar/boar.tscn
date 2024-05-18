@@ -112,7 +112,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -194,7 +194,7 @@ size = Vector2(5, 17)
 size = Vector2(41.2505, 26.6157)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kw8ms"]
-size = Vector2(22, 18)
+size = Vector2(22, 24)
 
 [node name="Boar" type="CharacterBody2D"]
 collision_layer = 2
@@ -203,6 +203,7 @@ script = ExtResource("1_x7jo7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jhqx7")
 animation = &"idle"
+autoplay = "idle"
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -288,7 +289,6 @@ position = Vector2(-24, 4)
 shape = SubResource("RectangleShape2D_adeol")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-visible = false
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("12_hfjcv")
@@ -302,7 +302,7 @@ shape = SubResource("RectangleShape2D_fje26")
 attack = NodePath("../Attack")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConstantDmgHitbox"]
-position = Vector2(-3, 6)
+position = Vector2(-3, 4)
 shape = SubResource("RectangleShape2D_kw8ms")
 
 [connection signal="dead" from="Health" to="." method="_on_health_dead"]
@@ -311,3 +311,4 @@ shape = SubResource("RectangleShape2D_kw8ms")
 [connection signal="timeout" from="StateMachine/Walking/DirectionSwapTimer" to="StateMachine/Walking" method="_on_direction_swap_timer_timeout"]
 [connection signal="body_entered" from="PlayerDetectionArea" to="StateMachine" method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="PlayerDetectionArea" to="StateMachine/Following" method="_on_detection_area_body_entered"]
+[connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]

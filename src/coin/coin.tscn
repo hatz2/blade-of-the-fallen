@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://dfbus5ox1hv2b"]
+
+[ext_resource type="Script" path="res://src/coin/coin.gd" id="1_5w0cv"]
+[ext_resource type="Texture2D" uid="uid://33u2nh86lkox" path="res://assets/MOEDA DOURADA/Coin/Coin.png" id="1_sccsf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4p0o"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(0, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa3qe"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(800, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh71y"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(1600, 0, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff5nk"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(0, 800, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vosu4"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(800, 800, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_184o0"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(1600, 800, 800, 800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hpns"]
+atlas = ExtResource("1_sccsf")
+region = Rect2(0, 1600, 800, 800)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vckmq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4p0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa3qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh71y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ff5nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vosu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_184o0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hpns")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gaclu"]
+radius = 10.0499
+
+[node name="Coin" type="Area2D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_5w0cv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+sprite_frames = SubResource("SpriteFrames_vckmq")
+autoplay = "default"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gaclu")
+metadata/_edit_group_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

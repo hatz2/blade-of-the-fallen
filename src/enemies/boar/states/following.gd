@@ -38,11 +38,12 @@ func physics_update(_delta):
 		monster_body.velocity.x = sign(direction_to_move.x) * speed
 	else:
 		monster_body.velocity.x = 0
+		
 	
-	if horizontal_distance < STOP_MOVE_DISTANCE: # we are not moving at all
-		animated_sprite.play(idle_animation)
-	else:
-		animated_sprite.play(follow_animation)
+	#if horizontal_distance < STOP_MOVE_DISTANCE: # we are not moving at all
+		#animated_sprite.play(idle_animation)
+	#else:
+		#animated_sprite.play(follow_animation)
 		
 	last_monster_pos = monster_body.global_position
 	

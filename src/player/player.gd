@@ -11,6 +11,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var state_machine: StateMachine = $StateMachine
 @onready var hit_area_col_shape: CollisionShape2D = %HitboxShape
 
+var coins := 0
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -34,9 +36,6 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-	
-func _process(_delta):
-	pass
 	
 func _update_hit_box_orientation(last_sprite_orientation: bool):
 	if last_sprite_orientation != sprite.flip_h:

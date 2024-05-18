@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://src/hitbox/hitbox.gd" id="12_54jfv"]
 [ext_resource type="Script" path="res://src/health/health.gd" id="13_3s8pu"]
 [ext_resource type="Script" path="res://src/hurtbox/hurtbox.gd" id="13_5bu7p"]
-[ext_resource type="Script" path="res://src/attack/attack.gd" id="14_t3nqo"]
+[ext_resource type="Script" path="res://src/attack/attack.gd" id="15_0uath"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8rb7"]
 animation = &"attack"
@@ -579,6 +579,7 @@ height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
+collision_mask = 17
 script = ExtResource("1_yrp23")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -673,9 +674,11 @@ shape = SubResource("CapsuleShape2D_hqd84")
 script = ExtResource("13_3s8pu")
 
 [node name="Attack" type="Node" parent="."]
-script = ExtResource("14_t3nqo")
-damage = 50
-knockback = 100
+script = ExtResource("15_0uath")
+damage = 20
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
 
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Attacking" method="_on_animation_tree_animation_finished"]

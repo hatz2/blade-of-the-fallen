@@ -7,17 +7,10 @@ const JUMP_VELOCITY = -400.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var _state_machine: MonsterStateMachine = $StateMachine
-var _last_position: Vector2
-
-
 @onready var sprite := $AnimatedSprite2D
 @onready var edge_detection_shape := $EdgeDetectionArea/CollisionShape2D
 @onready var wall_detection_shape := $WallDetectionArea/CollisionShape2D
 @onready var player_detection_shape := $PlayerDetectionArea/CollisionShape2D
-
-func _ready():
-	_last_position = global_position
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -40,8 +33,14 @@ func update_sprite_orientation():
 		edge_detection_shape.position.x *= -1
 		player_detection_shape.position.x *= -1
 		wall_detection_shape.position.x *= -1
-		
 
 func _on_health_dead():
 	set_physics_process(false)
 	queue_free()
+
+
+func _on_hurtbox_hit():
+	var previous_anim = sprite.animation
+	sprite.play("hit")
+	await sprite.animation_finished
+	sprite.play(previous_anim)

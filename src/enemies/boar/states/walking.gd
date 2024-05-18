@@ -33,7 +33,7 @@ func exit():
 func update(_delta):
 	pass
 	
-func physics_update(delta):
+func physics_update(_delta):
 	if moving_right:
 		body.velocity.x = walk_speed
 	else:

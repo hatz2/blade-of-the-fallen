@@ -12,6 +12,8 @@ func _ready():
 func damage(attack: Attack):
 	health -= attack.damage
 	
+	health = max(health, 0)
+	
 	if health <= 0:
 		# Delete the object
 		#get_parent().queue_free()
