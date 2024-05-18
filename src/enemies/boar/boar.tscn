@@ -1,21 +1,19 @@
-[gd_scene load_steps=35 format=3 uid="uid://lwdox3loupxq"]
+[gd_scene load_steps=42 format=3 uid="uid://lwdox3loupxq"]
 
 [ext_resource type="Texture2D" uid="uid://113woi6kbiw1" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Hit-Vanish/Hit-Sheet.png" id="1_f875e"]
 [ext_resource type="Texture2D" uid="uid://datufyi5thwhk" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Idle/Idle-Sheet.png" id="1_noomr"]
-[ext_resource type="Script" path="res://src/monster/monster.gd" id="1_x7jo7"]
+[ext_resource type="Script" path="res://src/enemies/boar/boar.gd" id="1_x7jo7"]
 [ext_resource type="Texture2D" uid="uid://1015p53d038r" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet.png" id="2_rwokc"]
 [ext_resource type="Texture2D" uid="uid://bisjd50wnmuoa" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Walk/Walk-Base-Sheet.png" id="3_dpg0l"]
-[ext_resource type="Script" path="res://src/monster/states/monster_state_machine.gd" id="6_fyg4p"]
-[ext_resource type="Script" path="res://src/monster/states/idle.gd" id="7_g746q"]
-[ext_resource type="Script" path="res://src/monster/states/walking.gd" id="8_7or5b"]
-[ext_resource type="Script" path="res://src/monster/debug_label.gd" id="9_1umje"]
-[ext_resource type="Script" path="res://src/monster/states/following.gd" id="9_vpjh8"]
-
-[sub_resource type="Curve2D" id="Curve2D_262s4"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 3
+[ext_resource type="Script" path="res://src/attack/attack.gd" id="6_ffkr2"]
+[ext_resource type="Script" path="res://src/enemies/boar/states/monster_state_machine.gd" id="6_fyg4p"]
+[ext_resource type="Script" path="res://src/enemies/boar/states/idle.gd" id="7_g746q"]
+[ext_resource type="Script" path="res://src/enemies/boar/states/walking.gd" id="8_7or5b"]
+[ext_resource type="Script" path="res://src/enemies/boar/debug_label.gd" id="9_1umje"]
+[ext_resource type="Script" path="res://src/enemies/boar/states/following.gd" id="9_vpjh8"]
+[ext_resource type="Script" path="res://src/health/health.gd" id="11_fc3ny"]
+[ext_resource type="Script" path="res://src/hurtbox/hurtbox.gd" id="12_hfjcv"]
+[ext_resource type="PackedScene" uid="uid://cnejyrbhg1isj" path="res://src/hitbox/constant_dmg_hitbox.tscn" id="14_b14ha"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2jp3"]
 atlas = ExtResource("1_f875e")
@@ -181,62 +179,79 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60awq"]
-size = Vector2(27.0082, 39.0076)
+size = Vector2(21.0085, 36.0078)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26osw"]
-size = Vector2(200, 30)
+size = Vector2(82.0101, 30)
 
-[node name="Path2D" type="Path2D"]
-curve = SubResource("Curve2D_262s4")
-metadata/_edit_group_ = true
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnh6f"]
+size = Vector2(5, 5)
 
-[node name="PathFollow2D" type="PathFollow2D" parent="."]
-rotation = 0.00934552
-rotates = false
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adeol"]
+size = Vector2(5, 17)
 
-[node name="Monster" type="CharacterBody2D" parent="PathFollow2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fje26"]
+size = Vector2(41.2505, 26.6157)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kw8ms"]
+size = Vector2(22, 18)
+
+[node name="Boar" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_x7jo7")
-metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/Monster"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jhqx7")
 animation = &"idle"
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Monster"]
-position = Vector2(-1.48592, 2.51391)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-0.967256, 5.51379)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_60awq")
 metadata/_edit_group_ = true
 
-[node name="StateMachine" type="Node" parent="PathFollow2D/Monster" node_paths=PackedStringArray("initial_state")]
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("6_ffkr2")
+damage = 5
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("11_fc3ny")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_fyg4p")
 initial_state = NodePath("Walking")
 
-[node name="Idle" type="Node" parent="PathFollow2D/Monster/StateMachine" node_paths=PackedStringArray("walk_state", "animated_sprite")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk_state", "animated_sprite")]
 script = ExtResource("7_g746q")
 walk_state = NodePath("../Walking")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Timer" type="Timer" parent="PathFollow2D/Monster/StateMachine/Idle"]
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
 one_shot = true
 
-[node name="Walking" type="Node" parent="PathFollow2D/Monster/StateMachine" node_paths=PackedStringArray("body", "idle_state", "path_follow", "animated_sprite")]
+[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("edge_detection_area", "wall_detection_area", "body", "idle_state", "animated_sprite")]
 script = ExtResource("8_7or5b")
+edge_detection_area = NodePath("../../EdgeDetectionArea")
+wall_detection_area = NodePath("../../WallDetectionArea")
 body = NodePath("../..")
 idle_state = NodePath("../Idle")
-path_follow = NodePath("../../..")
 walk_speed = 25
+moving_right = false
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Timer" type="Timer" parent="PathFollow2D/Monster/StateMachine/Walking"]
+[node name="Timer" type="Timer" parent="StateMachine/Walking"]
 
-[node name="Following" type="Node" parent="PathFollow2D/Monster/StateMachine" node_paths=PackedStringArray("monster_body", "animated_sprite")]
+[node name="DirectionSwapTimer" type="Timer" parent="StateMachine/Walking"]
+wait_time = 0.5
+
+[node name="Following" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster_body", "animated_sprite")]
 script = ExtResource("9_vpjh8")
 monster_body = NodePath("../..")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="DebugLabel" type="Label" parent="PathFollow2D/Monster" node_paths=PackedStringArray("state_machine")]
+[node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -14.0
 offset_top = -26.0
 offset_right = 386.0
@@ -245,14 +260,54 @@ scale = Vector2(0.1, 0.1)
 theme_override_font_sizes/font_size = 100
 script = ExtResource("9_1umje")
 state_machine = NodePath("../StateMachine")
+metadata/_edit_use_anchors_ = true
 
-[node name="DetectionArea" type="Area2D" parent="PathFollow2D/Monster"]
+[node name="PlayerDetectionArea" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Monster/DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
+position = Vector2(-58.9949, -5.96046e-08)
 shape = SubResource("RectangleShape2D_26osw")
 
-[connection signal="timeout" from="PathFollow2D/Monster/StateMachine/Idle/Timer" to="PathFollow2D/Monster/StateMachine/Idle" method="_on_timer_timeout"]
-[connection signal="timeout" from="PathFollow2D/Monster/StateMachine/Walking/Timer" to="PathFollow2D/Monster/StateMachine/Walking" method="_on_timer_timeout"]
-[connection signal="body_entered" from="PathFollow2D/Monster/DetectionArea" to="PathFollow2D/Monster/StateMachine" method="_on_detection_area_body_entered"]
-[connection signal="body_entered" from="PathFollow2D/Monster/DetectionArea" to="PathFollow2D/Monster/StateMachine/Following" method="_on_detection_area_body_entered"]
+[node name="EdgeDetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeDetectionArea"]
+position = Vector2(-24, 16)
+shape = SubResource("RectangleShape2D_dnh6f")
+
+[node name="WallDetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetectionArea"]
+position = Vector2(-24, 4)
+shape = SubResource("RectangleShape2D_adeol")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+visible = false
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("12_hfjcv")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1.47657, 2.51391)
+shape = SubResource("RectangleShape2D_fje26")
+
+[node name="ConstantDmgHitbox" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("14_b14ha")]
+attack = NodePath("../Attack")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConstantDmgHitbox"]
+position = Vector2(-3, 6)
+shape = SubResource("RectangleShape2D_kw8ms")
+
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Walking/Timer" to="StateMachine/Walking" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Walking/DirectionSwapTimer" to="StateMachine/Walking" method="_on_direction_swap_timer_timeout"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="StateMachine" method="_on_detection_area_body_entered"]
+[connection signal="body_entered" from="PlayerDetectionArea" to="StateMachine/Following" method="_on_detection_area_body_entered"]

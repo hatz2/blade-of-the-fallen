@@ -9,7 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite := $Sprite2D
 @onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback")
 @onready var state_machine: StateMachine = $StateMachine
-@onready var hit_area_col_shape: CollisionShape2D = $HitArea/CollisionShape2D
+@onready var hit_area_col_shape: CollisionShape2D = %HitboxShape
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -41,8 +41,3 @@ func _process(_delta):
 func _update_hit_box_orientation(last_sprite_orientation: bool):
 	if last_sprite_orientation != sprite.flip_h:
 		hit_area_col_shape.position.x = hit_area_col_shape.position.x * -1
-
-
-
-func _on_hit_area_body_entered(body):
-	print(body.name)

@@ -1,11 +1,14 @@
 class_name Following
 extends MonsterState
 
-var player: Player = null
+
 @export var speed := 100
 @export var follow_animation := "run"
+@export var idle_animation := "idle"
 @export var monster_body: CharacterBody2D
 
+const STOP_MOVE_DISTANCE := 15
+var player: Player = null
 var last_monster_pos: Vector2
 
 func _ready():
@@ -28,13 +31,16 @@ func physics_update(_delta):
 		return
 		
 	var direction_to_move = player.global_position - monster_body.global_position
-	direction_to_move.y = 0
-	direction_to_move = direction_to_move.normalized()
 	
-	monster_body.velocity = direction_to_move * speed
+	var horizontal_distance = abs(player.global_position.x - monster_body.global_position.x)
 	
-	if monster_body.global_position.x - last_monster_pos.x == 0: # we are not moving at all
-		animated_sprite.play("idle")
+	if horizontal_distance > STOP_MOVE_DISTANCE:
+		monster_body.velocity.x = sign(direction_to_move.x) * speed
+	else:
+		monster_body.velocity.x = 0
+	
+	if horizontal_distance < STOP_MOVE_DISTANCE: # we are not moving at all
+		animated_sprite.play(idle_animation)
 	else:
 		animated_sprite.play(follow_animation)
 		
