@@ -194,7 +194,7 @@ size = Vector2(5, 17)
 size = Vector2(41.2505, 26.6157)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kw8ms"]
-size = Vector2(22, 24)
+size = Vector2(31, 24)
 
 [node name="Boar" type="CharacterBody2D"]
 collision_layer = 2
@@ -247,9 +247,10 @@ animated_sprite = NodePath("../../AnimatedSprite2D")
 [node name="DirectionSwapTimer" type="Timer" parent="StateMachine/Walking"]
 wait_time = 0.5
 
-[node name="Following" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster_body", "animated_sprite")]
+[node name="Following" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster_body", "hitbox_coll_shape", "animated_sprite")]
 script = ExtResource("9_vpjh8")
 monster_body = NodePath("../..")
+hitbox_coll_shape = NodePath("../../ConstantDmgHitbox/CollisionShape2D")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
 [node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
@@ -302,8 +303,9 @@ shape = SubResource("RectangleShape2D_fje26")
 attack = NodePath("../Attack")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConstantDmgHitbox"]
-position = Vector2(-3, 4)
+position = Vector2(-4.5, 4)
 shape = SubResource("RectangleShape2D_kw8ms")
+disabled = true
 
 [connection signal="dead" from="Health" to="." method="_on_health_dead"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

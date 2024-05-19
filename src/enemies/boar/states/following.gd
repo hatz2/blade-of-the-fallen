@@ -6,6 +6,7 @@ extends MonsterState
 @export var follow_animation := "run"
 @export var idle_animation := "idle"
 @export var monster_body: CharacterBody2D
+@export var hitbox_coll_shape: CollisionShape2D
 
 const STOP_MOVE_DISTANCE := 15
 var player: Player = null
@@ -17,9 +18,11 @@ func _ready():
 func enter():
 	last_monster_pos = monster_body.global_position
 	animated_sprite.play(follow_animation)
+	hitbox_coll_shape.disabled = false
 	pass
 	
 func exit():
+	hitbox_coll_shape.disabled = true
 	pass
 
 func update(_delta):
