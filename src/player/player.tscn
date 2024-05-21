@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cve55lkj8fx40"]
+[gd_scene load_steps=58 format=3 uid="uid://cve55lkj8fx40"]
 
 [ext_resource type="Texture2D" uid="uid://bdygcu6cm3nkc" path="res://assets/Legacy-Fantasy - High Forest 2.3/Character/Attack-01/Attack-01-Sheet.png" id="1_drosy"]
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_yrp23"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/health/health.gd" id="13_3s8pu"]
 [ext_resource type="Script" path="res://src/hurtbox/hurtbox.gd" id="13_5bu7p"]
 [ext_resource type="Script" path="res://src/attack/attack.gd" id="15_0uath"]
+[ext_resource type="Script" path="res://src/player/camera.gd" id="16_vbxmf"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8rb7"]
 animation = &"attack"
@@ -679,6 +680,10 @@ damage = 20
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+limit_smoothed = true
+position_smoothing_speed = 20.0
+editor_draw_limits = true
+script = ExtResource("16_vbxmf")
 
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Attacking" method="_on_animation_tree_animation_finished"]
