@@ -1,3 +1,4 @@
+class_name Boar
 extends CharacterBody2D
 
 

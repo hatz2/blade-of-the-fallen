@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1aita7o43o7m"]
+
+[ext_resource type="Script" path="res://src/level_complete_detector/level_complete_detector.gd" id="1_0k2fn"]
+
+[node name="LevelCompleteDetector" type="Node"]
+script = ExtResource("1_0k2fn")
