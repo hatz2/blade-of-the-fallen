@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjtlc1g6cxthw"]
+
+[ext_resource type="Script" path="res://src/fall_death_zone/fall_death_zone.gd" id="1_xpgoq"]
+
+[node name="FallDeathZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_xpgoq")

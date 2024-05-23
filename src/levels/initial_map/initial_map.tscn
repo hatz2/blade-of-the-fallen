@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwgqj4qr1jqlv"]
+[gd_scene load_steps=8 format=3 uid="uid://cwgqj4qr1jqlv"]
 
 [ext_resource type="TileSet" uid="uid://5p7yuwgixnnn" path="res://src/levels/level_tileset.tres" id="1_isp7a"]
 [ext_resource type="Script" path="res://src/levels/initial_map/initial_map.gd" id="1_ygeww"]
-[ext_resource type="PackedScene" uid="uid://cve55lkj8fx40" path="res://src/player/player.tscn" id="3_bjw4v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dndg"]
 size = Vector2(20, 818)
@@ -36,12 +35,10 @@ layer_5/name = "Rock text"
 layer_5/tile_data = PackedInt32Array(-327682, 2, 19, -262146, 2, 20, -327681, 65538, 19, -262145, 65538, 20, -196610, 2, 18, -196608, 393218, 18, -196607, 393218, 17)
 script = ExtResource("1_ygeww")
 player_initial_position = NodePath("PlayerPos")
+next_scene_path = "res://src/levels/level_1_1/level_1_1.tscn"
 
 [node name="PlayerPos" type="Marker2D" parent="."]
-position = Vector2(375, -39)
-
-[node name="Player" parent="." instance=ExtResource("3_bjw4v")]
-position = Vector2(-133, -122)
+position = Vector2(-219, -33)
 
 [node name="Bound" type="StaticBody2D" parent="."]
 collision_mask = 4
@@ -73,6 +70,7 @@ position = Vector2(56, 198)
 shape = SubResource("RectangleShape2D_0gpsg")
 
 [node name="TutorialPanel" type="Panel" parent="."]
+visible = false
 offset_left = -101.0
 offset_top = -189.0
 offset_right = 93.0

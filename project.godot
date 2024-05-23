@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 CameraLimiter="*res://src/globals/camera_limiter.gd"
 Events="*res://src/globals/events.gd"
+Globals="*res://src/globals/globals.gd"
+PlayerInstance="*res://src/player/player.tscn"
 
 [display]
 

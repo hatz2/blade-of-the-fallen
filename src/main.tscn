@@ -1,11 +1,135 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjj4jwf7vcp78"]
+[gd_scene load_steps=10 format=3 uid="uid://bjj4jwf7vcp78"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_u35w2"]
 [ext_resource type="PackedScene" uid="uid://df7a0dgt801qv" path="res://src/ui/main_menu/main_menu.tscn" id="3_2y3vr"]
+[ext_resource type="PackedScene" uid="uid://cqxy1clj45uve" path="res://src/ui/health_bar/health_bar.tscn" id="3_3804l"]
+[ext_resource type="PackedScene" uid="uid://51h42qq8ojjp" path="res://src/ui/coin_counter/coin_ui.tscn" id="4_qa1jo"]
+
+[sub_resource type="Animation" id="Animation_nueh8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_edmhl"]
+resource_name = "in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_pv6cn"]
+resource_name = "out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q8t1h"]
+_data = {
+"RESET": SubResource("Animation_nueh8"),
+"in": SubResource("Animation_edmhl"),
+"out": SubResource("Animation_pv6cn")
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_arkf3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_u35w2")
 
 [node name="MainMenu" parent="." instance=ExtResource("3_2y3vr")]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="UILayer"]
+modulate = Color(1, 1, 1, 0.498039)
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 285.0
+offset_bottom = 132.0
+
+[node name="HealthBar" parent="UILayer" instance=ExtResource("3_3804l")]
+
+[node name="CoinUI" parent="UILayer" instance=ExtResource("4_qa1jo")]
+position = Vector2(9, 69)
+
+[node name="ChangeLevelCanvas" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChangeLevelCanvas"]
+libraries = {
+"": SubResource("AnimationLibrary_q8t1h")
+}
+
+[node name="TextureRect" type="TextureRect" parent="ChangeLevelCanvas"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_arkf3")
 
 [connection signal="start_game" from="MainMenu" to="." method="_on_main_menu_start_game"]

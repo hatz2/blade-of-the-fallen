@@ -3,12 +3,11 @@ extends BaseLevel
 
 func _ready():
 	super()
-	#$Player.global_position = $PlayerPos.global_position
-	$TutorialPanel.visible = false
 
 func _on_fall_area_body_entered(_body: Player):
-	# TODO: Change to first level scene
-	print("Player felt")
+	assert(not next_scene_path.is_empty())
+	change_level.emit(next_scene_path)
+	#get_tree().change_scene_to_file(next_scene_path)
 
 
 func _on_tutorial_area_body_entered(_body: Player):

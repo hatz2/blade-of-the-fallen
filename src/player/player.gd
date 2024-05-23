@@ -6,9 +6,9 @@ const JUMP_VELOCITY = -325.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var sprite := $Sprite2D
-@onready var playback: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback")
-@onready var state_machine: StateMachine = $StateMachine
+@onready var sprite := %Sprite2D
+@onready var playback: AnimationNodeStateMachinePlayback = %AnimationTree.get("parameters/playback")
+@onready var state_machine: StateMachine = %StateMachine
 @onready var hit_area_col_shape: CollisionShape2D = %HitboxShape
 
 var coins := 0
@@ -40,6 +40,16 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+	
 func _update_hit_box_orientation(last_sprite_orientation: bool):
 	if last_sprite_orientation != sprite.flip_h:
 		hit_area_col_shape.position.x = hit_area_col_shape.position.x * -1
+
+
+func die():
+	print("Player died")
+	set_physics_process(false)
+	visible = false
+
+func _on_health_dead():
+	die()

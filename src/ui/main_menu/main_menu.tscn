@@ -1955,7 +1955,7 @@ theme_override_font_sizes/font_size = 128
 text = "Blade Of The Fallen
 "
 
-[node name="Background" type="Node" parent="."]
+[node name="Background" type="Node2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="Background"]
 tile_set = SubResource("TileSet_j4mkn")

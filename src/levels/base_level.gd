@@ -1,7 +1,10 @@
 class_name BaseLevel
 extends TileMap
 
+signal change_level(level_path: String)
+
 @export var player_initial_position: Marker2D
+@export var next_scene_path: String
 
 func _ready():
 	var area: Rect2i = get_used_rect()
@@ -15,4 +18,5 @@ func _ready():
 	CameraLimiter.update_limits.emit(left, right, top, bottom)
 	
 	# Set the player position
-	Events.update_player_position.emit(player_initial_position.global_position)
+	PlayerInstance.global_position = player_initial_position.global_position
+	#Events.update_player_position.emit(player_initial_position.global_position)

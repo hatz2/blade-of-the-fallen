@@ -737,11 +737,21 @@ radius = 6.0
 height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 4
 collision_mask = 17
 script = ExtResource("1_yrp23")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-32, -40)
+texture = ExtResource("3_odhdv")
+centered = false
+hframes = 4
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeStateMachine_bd5c0")
 anim_player = NodePath("../AnimationPlayer")
 
@@ -750,13 +760,8 @@ libraries = {
 "": SubResource("AnimationLibrary_0cxk2")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-32, -40)
-texture = ExtResource("3_odhdv")
-centered = false
-hframes = 4
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
 script = ExtResource("6_sjrvo")
 initial_state = NodePath("Ground")
 
@@ -831,6 +836,7 @@ shape = SubResource("CapsuleShape2D_hqd84")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("13_3s8pu")
+MAX_HEALTH = 80
 
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("15_0uath")
@@ -850,3 +856,4 @@ volume_db = 10.0
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="StateMachine/Attacking" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="StateMachine/Attacking/Timer" to="StateMachine/Attacking" method="_on_timer_timeout"]
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]

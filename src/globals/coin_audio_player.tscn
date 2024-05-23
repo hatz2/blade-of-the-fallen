@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://gxd8p4anspjx"]
+
+[ext_resource type="AudioStream" uid="uid://d16l7iu8n205m" path="res://assets/sounds/collect-coin.mp3" id="1_gjl6k"]
+
+[sub_resource type="GDScript" id="GDScript_jk6ih"]
+script/source = "class_name CoinAudioPlayer
+extends AudioStreamPlayer
+	
+"
+
+[node name="CoinAudioPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_gjl6k")
+script = SubResource("GDScript_jk6ih")

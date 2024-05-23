@@ -1,22 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://c40a3syfdflvo"]
+[gd_scene load_steps=6 format=3 uid="uid://c40a3syfdflvo"]
 
 [ext_resource type="PackedScene" uid="uid://cqxy1clj45uve" path="res://src/ui/health_bar/health_bar.tscn" id="1_cc1c8"]
 [ext_resource type="PackedScene" uid="uid://51h42qq8ojjp" path="res://src/ui/coin_counter/coin_ui.tscn" id="2_uabu5"]
 [ext_resource type="PackedScene" uid="uid://lwdox3loupxq" path="res://src/enemies/boar/boar.tscn" id="3_huu0s"]
 [ext_resource type="TileSet" uid="uid://phqedyouro00" path="res://src/test_world/fantasy_tile_set.tres" id="3_w03f0"]
-[ext_resource type="PackedScene" uid="uid://cve55lkj8fx40" path="res://src/player/player.tscn" id="6_54g38"]
 [ext_resource type="PackedScene" uid="uid://dfbus5ox1hv2b" path="res://src/coin/coin.tscn" id="19_5kygs"]
 
 [node name="TestWorld" type="Node2D"]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="UILayer" node_paths=PackedStringArray("health") instance=ExtResource("1_cc1c8")]
-health = NodePath("../../Player/Health")
+[node name="HealthBar" parent="UILayer" instance=ExtResource("1_cc1c8")]
+offset_left = 26.0
+offset_top = 32.0
+offset_right = 286.0
+offset_bottom = 75.0
 
-[node name="CoinUI" parent="UILayer" node_paths=PackedStringArray("player") instance=ExtResource("2_uabu5")]
-position = Vector2(9, 69)
-player = NodePath("../../Player")
+[node name="CoinUI" parent="UILayer" instance=ExtResource("2_uabu5")]
+position = Vector2(19, 80)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("3_w03f0")
@@ -43,6 +44,3 @@ position = Vector2(397, 478)
 
 [node name="Coin4" parent="." instance=ExtResource("19_5kygs")]
 position = Vector2(825, 543)
-
-[node name="Player" parent="." instance=ExtResource("6_54g38")]
-position = Vector2(559, 544)
