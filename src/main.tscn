@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjj4jwf7vcp78"]
+[gd_scene load_steps=11 format=3 uid="uid://bjj4jwf7vcp78"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_u35w2"]
 [ext_resource type="PackedScene" uid="uid://df7a0dgt801qv" path="res://src/ui/main_menu/main_menu.tscn" id="3_2y3vr"]
 [ext_resource type="PackedScene" uid="uid://cqxy1clj45uve" path="res://src/ui/health_bar/health_bar.tscn" id="3_3804l"]
 [ext_resource type="PackedScene" uid="uid://51h42qq8ojjp" path="res://src/ui/coin_counter/coin_ui.tscn" id="4_qa1jo"]
+[ext_resource type="PackedScene" uid="uid://kwsuqvdphj8p" path="res://src/ui/pause_menu/pause_menu.tscn" id="5_7wdk1"]
 
 [sub_resource type="Animation" id="Animation_nueh8"]
 length = 0.001
@@ -114,6 +115,8 @@ offset_bottom = 132.0
 
 [node name="CoinUI" parent="UILayer" instance=ExtResource("4_qa1jo")]
 position = Vector2(9, 69)
+
+[node name="PauseMenu" parent="UILayer" instance=ExtResource("5_7wdk1")]
 
 [node name="ChangeLevelCanvas" type="CanvasLayer" parent="."]
 

@@ -7,7 +7,6 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D):
-	print(body.name)
 	if body is Player:
 		var player = body as Player
 		player.die()

@@ -1,0 +1,140 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3g1yylipce4m"]
+
+[ext_resource type="Script" path="res://src/ui/options_menu/options_menu.gd" id="1_osl1r"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_osl1r")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Graphics and sound" type="TabBar" parent="MarginContainer/Panel/MarginContainer/TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Resolution:"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "2560x1440"
+popup/item_1/id = 1
+popup/item_2/text = "3440x1440"
+popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Window mode:
+"
+
+[node name="OptionButton2" type="OptionButton" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Full screen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Borderless"
+popup/item_2/id = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "General volume:
+"
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+
+[node name="Label4" type="Label" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Music volume:"
+
+[node name="HSlider2" type="HSlider" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+
+[node name="Label5" type="Label" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Effects volume:
+"
+
+[node name="HSlider3" type="HSlider" parent="MarginContainer/Panel/MarginContainer/TabContainer/Graphics and sound/MarginContainer/GridContainer"]
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+
+[node name="Keyboard" type="TabBar" parent="MarginContainer/Panel/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/TabContainer/Keyboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/TabContainer/Keyboard/MarginContainer"]
+layout_mode = 2
