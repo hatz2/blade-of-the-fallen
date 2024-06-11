@@ -35,10 +35,10 @@ layer_5/name = "Rock text"
 layer_5/tile_data = PackedInt32Array(-327682, 2, 19, -262146, 2, 20, -327681, 65538, 19, -262145, 65538, 20, -196610, 2, 18, -196608, 393218, 18, -196607, 393218, 17)
 script = ExtResource("1_ygeww")
 player_initial_position = NodePath("PlayerPos")
-next_scene_path = "res://src/levels/level_1_2/level_1_2.tscn"
+next_scene_path = "res://src/levels/level_1_1/level_1_1.tscn"
 
 [node name="PlayerPos" type="Marker2D" parent="."]
-position = Vector2(499, 13)
+position = Vector2(-155, -33)
 
 [node name="Bound" type="StaticBody2D" parent="."]
 collision_mask = 4

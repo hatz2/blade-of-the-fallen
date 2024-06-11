@@ -1,10 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjj4jwf7vcp78"]
+[gd_scene load_steps=16 format=3 uid="uid://bjj4jwf7vcp78"]
 
 [ext_resource type="Script" path="res://src/main.gd" id="1_u35w2"]
-[ext_resource type="PackedScene" uid="uid://df7a0dgt801qv" path="res://src/ui/main_menu/main_menu.tscn" id="3_2y3vr"]
+[ext_resource type="Script" path="res://src/ui/main_menu/main_menu.gd" id="2_h6xba"]
 [ext_resource type="PackedScene" uid="uid://cqxy1clj45uve" path="res://src/ui/health_bar/health_bar.tscn" id="3_3804l"]
+[ext_resource type="PackedScene" uid="uid://d3g1yylipce4m" path="res://src/ui/options_menu/options_menu.tscn" id="3_ban2d"]
+[ext_resource type="Texture2D" uid="uid://cv7ijeraokd7r" path="res://assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="3_kk8nt"]
+[ext_resource type="Theme" uid="uid://dbxrxk11pourr" path="res://src/ui/main_menu/main_menu_theme.tres" id="4_p4ls7"]
 [ext_resource type="PackedScene" uid="uid://51h42qq8ojjp" path="res://src/ui/coin_counter/coin_ui.tscn" id="4_qa1jo"]
 [ext_resource type="PackedScene" uid="uid://kwsuqvdphj8p" path="res://src/ui/pause_menu/pause_menu.tscn" id="5_7wdk1"]
+[ext_resource type="PackedScene" uid="uid://7eegegf3p6ll" path="res://src/ui/main_menu/main_menu_background.tscn" id="5_81evu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v12q"]
+bg_color = Color(0, 0, 0, 0.537255)
 
 [sub_resource type="Animation" id="Animation_nueh8"]
 length = 0.001
@@ -99,24 +106,129 @@ _data = {
 [node name="Main" type="Node"]
 script = ExtResource("1_u35w2")
 
-[node name="MainMenu" parent="." instance=ExtResource("3_2y3vr")]
+[node name="MainUILayer" type="CanvasLayer" parent="."]
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="MainMenu" type="Control" parent="MainUILayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_h6xba")
+
+[node name="CenterContainer" type="CenterContainer" parent="MainUILayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background2" type="Sprite2D" parent="MainUILayer/MainMenu/CenterContainer"]
+scale = Vector2(4.1, 4.1)
+texture = ExtResource("3_kk8nt")
+
+[node name="Panel" type="Panel" parent="MainUILayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5v12q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainUILayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -200.5
+offset_right = 260.0
+offset_bottom = 200.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainUILayer/MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="StartButton" type="Button" parent="MainUILayer/MainMenu/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_p4ls7")
+text = "Start
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainUILayer/MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="OptionsButton" type="Button" parent="MainUILayer/MainMenu/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("4_p4ls7")
+text = "Options
+"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MainUILayer/MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="QuitButton" type="Button" parent="MainUILayer/MainMenu/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme = ExtResource("4_p4ls7")
+text = "Quit
+"
+
+[node name="GameTitle" type="Label" parent="MainUILayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -584.0
+offset_top = 1.0
+offset_right = 607.0
+offset_bottom = 176.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 128
+text = "Blade Of The Fallen
+"
+
+[node name="MainMenuBackground" parent="MainUILayer/MainMenu" instance=ExtResource("5_81evu")]
+
+[node name="OptionsMenu" parent="MainUILayer" instance=ExtResource("3_ban2d")]
+unique_name_in_owner = true
 visible = false
 
-[node name="Panel" type="Panel" parent="UILayer"]
+[node name="GameUILayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="GameUILayer"]
 modulate = Color(1, 1, 1, 0.498039)
 offset_left = 6.0
 offset_top = 9.0
 offset_right = 285.0
 offset_bottom = 132.0
 
-[node name="HealthBar" parent="UILayer" instance=ExtResource("3_3804l")]
+[node name="HealthBar" parent="GameUILayer" instance=ExtResource("3_3804l")]
 
-[node name="CoinUI" parent="UILayer" instance=ExtResource("4_qa1jo")]
+[node name="CoinUI" parent="GameUILayer" instance=ExtResource("4_qa1jo")]
 position = Vector2(9, 69)
 
-[node name="PauseMenu" parent="UILayer" instance=ExtResource("5_7wdk1")]
+[node name="PauseMenu" parent="GameUILayer" instance=ExtResource("5_7wdk1")]
 
 [node name="ChangeLevelCanvas" type="CanvasLayer" parent="."]
 
@@ -135,4 +247,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_arkf3")
 
-[connection signal="start_game" from="MainMenu" to="." method="_on_main_menu_start_game"]
+[connection signal="options_pressed" from="MainUILayer/MainMenu" to="." method="_on_main_menu_options_pressed"]
+[connection signal="start_game" from="MainUILayer/MainMenu" to="." method="_on_main_menu_start_game"]
+[connection signal="pressed" from="MainUILayer/MainMenu/VBoxContainer/MarginContainer/StartButton" to="MainUILayer/MainMenu" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainUILayer/MainMenu/VBoxContainer/MarginContainer2/OptionsButton" to="MainUILayer/MainMenu" method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainUILayer/MainMenu/VBoxContainer/MarginContainer3/QuitButton" to="MainUILayer/MainMenu" method="_on_quit_button_pressed"]
+[connection signal="go_back_menu" from="MainUILayer/OptionsMenu" to="." method="_on_options_menu_go_back_menu"]
+[connection signal="options_pressed" from="GameUILayer/PauseMenu" to="." method="_on_pause_menu_options_pressed"]

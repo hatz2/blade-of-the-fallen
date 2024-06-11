@@ -1,6 +1,7 @@
 extends Control
 
 signal start_game()
+signal options_pressed()
 
 func _ready():
 	%StartButton.grab_focus()
@@ -14,4 +15,4 @@ func _on_quit_button_pressed():
 
 
 func _on_options_button_pressed():
-	pass
+	options_pressed.emit()
