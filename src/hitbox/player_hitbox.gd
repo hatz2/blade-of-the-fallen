@@ -1,15 +1,15 @@
-class_name Hitbox
+class_name PlayerHitbox
 extends Area2D
-
-const HITBOX_LAYER := 8
 
 @export var attack: Attack
 
 func _init():
 	collision_layer = 0
-	collision_mask = HITBOX_LAYER
+	collision_mask = 32 # Enemy hurtbox mask
 	connect("area_entered", _on_area_entered)
 	
-func _on_area_entered(hurtbox: Hurtbox):
+func _on_area_entered(hurtbox: EnemyHurtbox):
 	hurtbox.take_damage(attack)
-
+	
+	# Apply knockback
+	

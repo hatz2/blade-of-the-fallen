@@ -15,8 +15,4 @@ func damage(attack: Attack):
 	health = max(health, 0)
 	
 	if health <= 0:
-		# Delete the object
-		#get_parent().queue_free()
-		
-		# We can instead send a signal of death
 		dead.emit()

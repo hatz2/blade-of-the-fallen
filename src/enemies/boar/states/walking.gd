@@ -17,7 +17,8 @@ var swap_state := false
 var _recently_swapped_direction := false
 
 func _ready():
-	pass
+	timer.timeout.connect(_on_timer_timeout)
+	direction_timer.timeout.connect(_on_direction_swap_timer_timeout)
 
 func enter():
 	swap_state = false

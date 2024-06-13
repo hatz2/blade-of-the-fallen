@@ -1,4 +1,4 @@
-class_name Hurtbox
+class_name PlayerHurtbox
 extends Area2D
 
 signal hit()

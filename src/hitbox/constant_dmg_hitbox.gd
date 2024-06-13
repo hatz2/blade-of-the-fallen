@@ -1,13 +1,14 @@
 class_name ConstantDmgHitbox
-extends Hitbox
+extends EnemyHitbox
 
 func _init():
-	super()
+	super._init()
+	collision_mask = 8 # Player hurtbox
 	disconnect("area_entered", _on_area_entered)
 
 func _on_timer_timeout():
-	var bodies: Array[Area2D] = get_overlapping_areas()
+	var areas: Array[Area2D] = get_overlapping_areas()
 	
-	for body in bodies:
-		if body is Hurtbox and body.owner != owner:
-			body.take_damage(attack)
+	for area in areas:
+		if area is PlayerHurtbox:
+			area.take_damage(attack)

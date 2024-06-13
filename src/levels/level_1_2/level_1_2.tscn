@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://src/enemies/boar/states/walking.gd" id="13_7kui1"]
 [ext_resource type="Script" path="res://src/enemies/boar/states/following.gd" id="14_xx48y"]
 [ext_resource type="Script" path="res://src/enemies/boar/debug_label.gd" id="15_ji3cc"]
-[ext_resource type="Script" path="res://src/hurtbox/hurtbox.gd" id="16_8bpjk"]
+[ext_resource type="Script" path="res://src/hurtbox/enemy_hurtbox.gd" id="16_8bpjk"]
 [ext_resource type="PackedScene" uid="uid://cnejyrbhg1isj" path="res://src/hitbox/constant_dmg_hitbox.tscn" id="17_6eomx"]
 [ext_resource type="PackedScene" uid="uid://lwdox3loupxq" path="res://src/enemies/boar/boar.tscn" id="20_bx6wn"]
 

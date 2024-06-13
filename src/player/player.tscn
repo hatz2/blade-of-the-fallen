@@ -13,10 +13,10 @@
 [ext_resource type="Script" path="res://src/player/states/landing.gd" id="9_3iq6f"]
 [ext_resource type="Script" path="res://src/player/states/attacking.gd" id="10_ajorf"]
 [ext_resource type="Script" path="res://src/player/debug_label.gd" id="10_g6ufd"]
-[ext_resource type="Script" path="res://src/hitbox/hitbox.gd" id="12_54jfv"]
 [ext_resource type="Script" path="res://src/health/health.gd" id="13_3s8pu"]
-[ext_resource type="Script" path="res://src/hurtbox/hurtbox.gd" id="13_5bu7p"]
+[ext_resource type="Script" path="res://src/hitbox/player_hitbox.gd" id="14_vt5su"]
 [ext_resource type="Script" path="res://src/attack/attack.gd" id="15_0uath"]
+[ext_resource type="Script" path="res://src/hurtbox/player_hurtbox.gd" id="15_rmdgk"]
 [ext_resource type="Script" path="res://src/player/camera.gd" id="16_vbxmf"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8rb7"]
@@ -730,7 +730,7 @@ _data = {
 size = Vector2(19, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0gu2"]
-size = Vector2(31, 50)
+size = Vector2(31, 47.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqd84"]
 radius = 6.0
@@ -815,20 +815,20 @@ metadata/_edit_group_ = true
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("attack")]
 collision_layer = 0
-collision_mask = 8
-script = ExtResource("12_54jfv")
+collision_mask = 0
+script = ExtResource("14_vt5su")
 attack = NodePath("../Attack")
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
 unique_name_in_owner = true
-position = Vector2(24.5, -1)
+position = Vector2(22.5, -0.25)
 shape = SubResource("RectangleShape2D_r0gu2")
 disabled = true
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
-script = ExtResource("13_5bu7p")
+script = ExtResource("15_rmdgk")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -841,6 +841,7 @@ MAX_HEALTH = 80
 [node name="Attack" type="Node" parent="."]
 script = ExtResource("15_0uath")
 damage = 20
+knockback = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false

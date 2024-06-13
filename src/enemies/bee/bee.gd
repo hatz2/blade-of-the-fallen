@@ -1,20 +1,19 @@
-class_name Boar
+class_name Bee
 extends CharacterBody2D
 
-
-const SPEED = 300.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+const SPEED = 200.0
 
 @export var moving_right: bool = true
-@onready var sprite := $AnimatedSprite2D
-@onready var edge_detection_shape := $EdgeDetectionArea/CollisionShape2D
-@onready var wall_detection_shape := $WallDetectionArea/CollisionShape2D
-@onready var player_detection_shape := $PlayerDetectionArea/CollisionShape2D
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var sprite = $AnimatedSprite2D
+@onready var edge_detection_shape := $FloorDetector/CollisionShape2D
+@onready var wall_detection_shape := $WallDetector/CollisionShape2D
+
 
 func _ready():
 	$StateMachine/Walking.moving_right = moving_right
+
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -23,6 +22,7 @@ func _physics_process(delta):
 		
 	update_sprite_orientation()
 	move_and_slide()
+	
 	
 func update_sprite_orientation():
 	var last_sprite_flip_h = sprite.flip_h
@@ -35,16 +35,9 @@ func update_sprite_orientation():
 	# Update collision shapes orientation if the sprite orientation changed
 	if sprite.flip_h != last_sprite_flip_h:
 		edge_detection_shape.position.x *= -1
-		player_detection_shape.position.x *= -1
 		wall_detection_shape.position.x *= -1
+
 
 func _on_health_dead():
 	set_physics_process(false)
 	queue_free()
-
-
-func _on_hurtbox_hit():
-	var previous_anim = sprite.animation
-	sprite.play("hit")
-	await sprite.animation_finished
-	sprite.play(previous_anim)

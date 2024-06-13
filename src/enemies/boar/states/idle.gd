@@ -7,7 +7,7 @@ extends MonsterState
 var swap_state = false
 
 func _ready():
-	pass
+	timer.timeout.connect(_on_timer_timeout)
 
 func enter():
 	# Make the timer random

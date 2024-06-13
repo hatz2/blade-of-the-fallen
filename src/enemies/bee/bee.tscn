@@ -1,0 +1,251 @@
+[gd_scene load_steps=32 format=3 uid="uid://dt3yy1x6frlbq"]
+
+[ext_resource type="Texture2D" uid="uid://0x0rq4mp2yt7" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Small Bee/Attack/Attack-Sheet.png" id="1_04ho4"]
+[ext_resource type="Script" path="res://src/enemies/bee/bee.gd" id="1_d6ken"]
+[ext_resource type="Texture2D" uid="uid://dukqp7loysg7r" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Small Bee/Fly/Fly-Sheet.png" id="2_onn7u"]
+[ext_resource type="Texture2D" uid="uid://cggvgrb2q64yn" path="res://assets/Legacy-Fantasy - High Forest 2.3/Mob/Small Bee/Hit/Hit-Sheet.png" id="3_j6huv"]
+[ext_resource type="Script" path="res://src/health/health.gd" id="4_la1ah"]
+[ext_resource type="Script" path="res://src/hurtbox/enemy_hurtbox.gd" id="5_quihv"]
+[ext_resource type="Script" path="res://src/enemies/boar/debug_label.gd" id="6_i00im"]
+[ext_resource type="Script" path="res://src/enemies/bee/states/bee_state_machine.gd" id="7_o6dlp"]
+[ext_resource type="Script" path="res://src/enemies/boar/states/walking.gd" id="9_5lf36"]
+[ext_resource type="Script" path="res://src/enemies/boar/states/idle.gd" id="10_e3cis"]
+[ext_resource type="Script" path="res://src/enemies/bee/states/attack.gd" id="11_ehoww"]
+[ext_resource type="Script" path="res://src/enemies/bee/states/hit.gd" id="12_mc4sf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cqyq"]
+atlas = ExtResource("1_04ho4")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb015"]
+atlas = ExtResource("1_04ho4")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m33e0"]
+atlas = ExtResource("1_04ho4")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_241nr"]
+atlas = ExtResource("1_04ho4")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_toyl3"]
+atlas = ExtResource("2_onn7u")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdnuq"]
+atlas = ExtResource("2_onn7u")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8ldv"]
+atlas = ExtResource("2_onn7u")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufxio"]
+atlas = ExtResource("2_onn7u")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h16uc"]
+atlas = ExtResource("3_j6huv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paqdd"]
+atlas = ExtResource("3_j6huv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjfr4"]
+atlas = ExtResource("3_j6huv")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d12hl"]
+atlas = ExtResource("3_j6huv")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qvn5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cqyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb015")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m33e0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_241nr")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_toyl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdnuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8ldv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufxio")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h16uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paqdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjfr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d12hl")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krlw5"]
+size = Vector2(19, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmbdd"]
+size = Vector2(18, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrmhu"]
+size = Vector2(432, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1m8n"]
+size = Vector2(3, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8dbn"]
+size = Vector2(20, 17.9999)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owd48"]
+size = Vector2(224, 69)
+
+[node name="Bee" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_d6ken")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0qvn5")
+animation = &"hit"
+frame = 3
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 19.5)
+shape = SubResource("RectangleShape2D_krlw5")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("5_quihv")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_bmbdd")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_la1ah")
+
+[node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -12.0
+offset_top = -29.0
+offset_right = 408.0
+offset_bottom = 108.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 100
+script = ExtResource("6_i00im")
+state_machine = NodePath("../StateMachine")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_o6dlp")
+initial_state = NodePath("Walking")
+
+[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("edge_detection_area", "wall_detection_area", "body", "idle_state", "animated_sprite")]
+script = ExtResource("9_5lf36")
+edge_detection_area = NodePath("../../FloorDetector")
+wall_detection_area = NodePath("../../WallDetector")
+body = NodePath("../..")
+idle_state = NodePath("../Idle")
+walk_animation = "fly"
+walk_speed = 50
+moving_right = false
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Timer" type="Timer" parent="StateMachine/Walking"]
+
+[node name="DirectionSwapTimer" type="Timer" parent="StateMachine/Walking"]
+wait_time = 0.5
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk_state", "animated_sprite")]
+script = ExtResource("10_e3cis")
+walk_state = NodePath("../Walking")
+idle_animation = "fly"
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
+one_shot = true
+
+[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("walk_state", "attack_area", "animated_sprite")]
+script = ExtResource("11_ehoww")
+walk_state = NodePath("../Walking")
+attack_area = NodePath("../../AttackArea")
+attack_animation = "attack"
+idle_animation = "fly"
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Timer" type="Timer" parent="StateMachine/AttackState"]
+wait_time = 2.0
+
+[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("attack_state", "animated_sprite")]
+script = ExtResource("12_mc4sf")
+attack_state = NodePath("../AttackState")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 17.5)
+shape = SubResource("RectangleShape2D_jrmhu")
+
+[node name="WallDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
+position = Vector2(-9, 0)
+shape = SubResource("RectangleShape2D_e1m8n")
+
+[node name="FloorDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorDetector"]
+position = Vector2(-11, 52)
+scale = Vector2(0.166667, 0.166667)
+shape = SubResource("RectangleShape2D_h8dbn")
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+position = Vector2(1, 17.5)
+shape = SubResource("RectangleShape2D_owd48")
+
+[connection signal="hit" from="Hurtbox" to="StateMachine" method="_on_hurtbox_hit"]
+[connection signal="dead" from="Health" to="." method="_on_health_dead"]
+[connection signal="body_entered" from="PlayerDetector" to="StateMachine" method="_on_player_detector_body_entered"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwgqj4qr1jqlv"]
+[gd_scene load_steps=9 format=3 uid="uid://cwgqj4qr1jqlv"]
 
 [ext_resource type="TileSet" uid="uid://5p7yuwgixnnn" path="res://src/levels/level_tileset.tres" id="1_isp7a"]
 [ext_resource type="Script" path="res://src/levels/initial_map/initial_map.gd" id="1_ygeww"]
+[ext_resource type="PackedScene" uid="uid://dt3yy1x6frlbq" path="res://src/enemies/bee/bee.tscn" id="3_36ow7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dndg"]
 size = Vector2(20, 818)
@@ -38,7 +39,7 @@ player_initial_position = NodePath("PlayerPos")
 next_scene_path = "res://src/levels/level_1_1/level_1_1.tscn"
 
 [node name="PlayerPos" type="Marker2D" parent="."]
-position = Vector2(-155, -33)
+position = Vector2(-288, -41)
 
 [node name="Bound" type="StaticBody2D" parent="."]
 collision_mask = 4
@@ -102,6 +103,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialArea"]
 position = Vector2(1, -62.5)
 shape = SubResource("RectangleShape2D_oalas")
+
+[node name="Bee" parent="." instance=ExtResource("3_36ow7")]
+position = Vector2(-64, -69)
 
 [connection signal="body_entered" from="FallArea" to="." method="_on_fall_area_body_entered"]
 [connection signal="body_entered" from="TutorialArea" to="." method="_on_tutorial_area_body_entered"]
