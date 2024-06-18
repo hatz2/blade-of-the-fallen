@@ -1,6 +1,7 @@
 class_name Bee
 extends CharacterBody2D
 
+const DAMAGE_INDICATOR = preload("res://src/ui/damage_indicator/damage_indicator.tscn")
 const SPEED = 200.0
 
 @export var moving_right: bool = true
@@ -41,3 +42,11 @@ func update_sprite_orientation():
 func _on_health_dead():
 	set_physics_process(false)
 	queue_free()
+
+
+func _on_hurtbox_hit(damage: int):
+	var indicator = DAMAGE_INDICATOR.instantiate()
+	indicator.damage_number = damage
+	print(indicator.global_position)
+	indicator.global_position = $DamagePosition.global_position
+	get_tree().current_scene.add_child(indicator)

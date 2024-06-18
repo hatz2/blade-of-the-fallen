@@ -301,12 +301,15 @@ position = Vector2(-1.47657, 2.51391)
 shape = SubResource("RectangleShape2D_ohfla")
 
 [node name="ConstantDmgHitbox" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("14_b14ha")]
+visible = false
 attack = NodePath("../Attack")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConstantDmgHitbox"]
 position = Vector2(-4.5, 4)
 shape = SubResource("RectangleShape2D_6v7or")
 disabled = true
+
+[node name="DamagePosition" type="Marker2D" parent="."]
 
 [connection signal="dead" from="Health" to="." method="_on_health_dead"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

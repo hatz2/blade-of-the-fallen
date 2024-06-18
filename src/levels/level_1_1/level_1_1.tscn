@@ -3,10 +3,10 @@
 [ext_resource type="TileSet" uid="uid://5p7yuwgixnnn" path="res://src/levels/level_tileset.tres" id="1_dy7df"]
 [ext_resource type="Script" path="res://src/levels/level_1_1/level_1_1.gd" id="1_f4nau"]
 [ext_resource type="Script" path="res://src/level_complete_detector/level_complete_detector.gd" id="4_bktes"]
+[ext_resource type="PackedScene" uid="uid://vfc78wr2yvq1" path="res://src/reward_handler/reward_handler.tscn" id="7_qjs0n"]
 [ext_resource type="PackedScene" uid="uid://lwdox3loupxq" path="res://src/enemies/boar/boar.tscn" id="18_5nvwp"]
 [ext_resource type="PackedScene" uid="uid://dfbus5ox1hv2b" path="res://src/coin/coin.tscn" id="20_jmytg"]
 [ext_resource type="Script" path="res://src/fall_death_zone/fall_death_zone.gd" id="21_7ky3l"]
-[ext_resource type="PackedScene" uid="uid://dt3yy1x6frlbq" path="res://src/enemies/bee/bee.tscn" id="21_tnikt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyl58"]
 size = Vector2(28, 1172.5)
@@ -55,15 +55,16 @@ script = ExtResource("4_bktes")
 [node name="Boar2" parent="LevelCompleteDetector" instance=ExtResource("18_5nvwp")]
 position = Vector2(607, -156)
 
-[node name="Bee" parent="LevelCompleteDetector" instance=ExtResource("21_tnikt")]
-position = Vector2(1012, -65)
-
-[node name="Bee2" parent="LevelCompleteDetector" instance=ExtResource("21_tnikt")]
-position = Vector2(1397, -99)
-
 [node name="Boar" parent="LevelCompleteDetector" instance=ExtResource("18_5nvwp")]
 position = Vector2(-41, -33)
 moving_right = false
+
+[node name="Boar3" parent="LevelCompleteDetector" instance=ExtResource("18_5nvwp")]
+position = Vector2(946, -31)
+moving_right = false
+
+[node name="Boar4" parent="LevelCompleteDetector" instance=ExtResource("18_5nvwp")]
+position = Vector2(1377, -64)
 
 [node name="Coin" parent="." instance=ExtResource("20_jmytg")]
 position = Vector2(63, -35)
@@ -97,3 +98,15 @@ script = ExtResource("21_7ky3l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallDeathZone"]
 position = Vector2(690.5, 267)
 shape = SubResource("RectangleShape2D_tci7a")
+
+[node name="FirstChestPos" type="Marker2D" parent="."]
+position = Vector2(1391, -63)
+
+[node name="SecondChestPos" type="Marker2D" parent="."]
+position = Vector2(1492, -63)
+
+[node name="RewardHandler" parent="." node_paths=PackedStringArray("first_chest_pos", "second_chest_pos") instance=ExtResource("7_qjs0n")]
+first_chest_pos = NodePath("../FirstChestPos")
+second_chest_pos = NodePath("../SecondChestPos")
+
+[connection signal="level_completed" from="LevelCompleteDetector" to="RewardHandler" method="on_level_completed"]

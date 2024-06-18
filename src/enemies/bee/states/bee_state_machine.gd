@@ -8,6 +8,6 @@ func _on_player_detector_body_entered(player: Player):
 		on_transition(attack_state)
 
 
-func _on_hurtbox_hit():
+func _on_hurtbox_hit(damage: int):
 	if current_state != hit_state:
 		on_transition(hit_state)

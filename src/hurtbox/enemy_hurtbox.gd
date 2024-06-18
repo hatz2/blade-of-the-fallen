@@ -1,7 +1,7 @@
 class_name EnemyHurtbox
 extends Area2D
 
-signal hit()
+signal hit(damage: int)
 
 @export var health: Health
 
@@ -12,7 +12,7 @@ func _init():
 func take_damage(attack: Attack):
 	if health:
 		health.damage(attack)
-		hit.emit()
+		hit.emit(attack.damage)
 		
 		var direction = owner.global_position - attack.owner.global_position as Vector2
 		var knockback = Vector2(sign(direction.x), 0)

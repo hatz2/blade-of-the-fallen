@@ -2,6 +2,7 @@ class_name Boar
 extends CharacterBody2D
 
 
+const DAMAGE_INDICATOR = preload("res://src/ui/damage_indicator/damage_indicator.tscn")
 const SPEED = 300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -43,8 +44,15 @@ func _on_health_dead():
 	queue_free()
 
 
-func _on_hurtbox_hit():
+func _on_hurtbox_hit(damage: int):
 	var previous_anim = sprite.animation
 	sprite.play("hit")
+	
+	# Spawn damage number object
+	var indicator = DAMAGE_INDICATOR.instantiate()
+	indicator.global_position = $DamagePosition.global_position
+	indicator.damage_number = damage
+	get_tree().current_scene.add_child(indicator)
+	
 	await sprite.animation_finished
 	sprite.play(previous_anim)

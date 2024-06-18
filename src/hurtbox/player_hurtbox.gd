@@ -1,7 +1,7 @@
 class_name PlayerHurtbox
 extends Area2D
 
-signal hit()
+signal hit(damage: int)
 
 @export var health: Health
 
@@ -12,4 +12,4 @@ func _init():
 func take_damage(attack: Attack):
 	if health:
 		health.damage(attack)
-		hit.emit()
+		hit.emit(attack.damage)

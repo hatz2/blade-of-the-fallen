@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -325.0
+const DAMAGE_INDICATOR = preload("res://src/ui/damage_indicator/damage_indicator.tscn")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -53,3 +54,12 @@ func die():
 
 func _on_health_dead():
 	die()
+
+
+func _on_hurtbox_hit(damage):
+	var indicator = DAMAGE_INDICATOR.instantiate()
+	indicator.damage_number = damage
+	indicator.global_position = $DamagePosition.global_position
+	indicator.color = Color(1.0, 0.0, 0.0, 1.0)
+	get_tree().current_scene.add_child(indicator)
+	

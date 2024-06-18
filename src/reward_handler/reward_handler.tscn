@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://vfc78wr2yvq1"]
+
+[ext_resource type="Script" path="res://src/reward_handler/reward_handler.gd" id="1_d0sjt"]
+
+[node name="RewardHandler" type="Node"]
+script = ExtResource("1_d0sjt")
+
+[node name="NextLevelTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="NextLevelTimer" to="." method="_on_next_level_timer_timeout"]

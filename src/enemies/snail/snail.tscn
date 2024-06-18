@@ -231,6 +231,7 @@ position = Vector2(0.5, 5)
 shape = SubResource("RectangleShape2D_6f24m")
 
 [node name="EnemyHurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+visible = false
 script = ExtResource("5_jd0p8")
 health = NodePath("../Health")
 
@@ -277,6 +278,7 @@ script = ExtResource("9_btpes")
 state_machine = NodePath("../StateMachine")
 
 [node name="WallDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
@@ -284,6 +286,7 @@ position = Vector2(-16, 6)
 shape = SubResource("RectangleShape2D_ivhaj")
 
 [node name="FloorDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorDetector"]
@@ -292,6 +295,7 @@ scale = Vector2(0.179904, 0.179904)
 shape = SubResource("RectangleShape2D_6ko8t")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 
@@ -299,6 +303,11 @@ collision_mask = 4
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_ro7pk")
 
+[node name="DamagePosition" type="Marker2D" parent="."]
+visible = false
+position = Vector2(0, -7)
+
 [connection signal="dead" from="Health" to="." method="_on_health_dead"]
+[connection signal="hit" from="EnemyHurtbox" to="." method="_on_enemy_hurtbox_hit"]
 [connection signal="timeout" from="StateMachine/Hide/Timer" to="StateMachine/Hide" method="_on_timer_timeout"]
 [connection signal="body_entered" from="PlayerDetector" to="StateMachine" method="_on_player_detector_body_entered"]

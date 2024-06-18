@@ -137,6 +137,9 @@ size = Vector2(224, 69)
 collision_layer = 2
 script = ExtResource("1_d6ken")
 
+[node name="DamagePosition" type="Marker2D" parent="."]
+position = Vector2(0, -18)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0qvn5")
 animation = &"hit"
@@ -144,10 +147,12 @@ frame = 3
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, 19.5)
 shape = SubResource("RectangleShape2D_krlw5")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("5_quihv")
@@ -216,6 +221,7 @@ attack_state = NodePath("../AttackState")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 
@@ -224,6 +230,7 @@ position = Vector2(0, 17.5)
 shape = SubResource("RectangleShape2D_jrmhu")
 
 [node name="WallDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
@@ -231,6 +238,7 @@ position = Vector2(-9, 0)
 shape = SubResource("RectangleShape2D_e1m8n")
 
 [node name="FloorDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorDetector"]
@@ -239,6 +247,7 @@ scale = Vector2(0.166667, 0.166667)
 shape = SubResource("RectangleShape2D_h8dbn")
 
 [node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 
@@ -246,6 +255,7 @@ collision_mask = 4
 position = Vector2(1, 17.5)
 shape = SubResource("RectangleShape2D_owd48")
 
+[connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
 [connection signal="hit" from="Hurtbox" to="StateMachine" method="_on_hurtbox_hit"]
 [connection signal="dead" from="Health" to="." method="_on_health_dead"]
 [connection signal="body_entered" from="PlayerDetector" to="StateMachine" method="_on_player_detector_body_entered"]

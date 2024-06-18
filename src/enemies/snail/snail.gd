@@ -1,10 +1,15 @@
 extends CharacterBody2D
 
+const DAMAGE_INDICATOR = preload("res://src/ui/damage_indicator/damage_indicator.tscn")
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite = $AnimatedSprite2D
 @onready var edge_detection_shape := $FloorDetector/CollisionShape2D
 @onready var wall_detection_shape := $WallDetector/CollisionShape2D
+@export var moving_right: bool = true
+
+func _ready():
+	$StateMachine/Walking.moving_right = moving_right
 
 
 func _physics_process(delta):
@@ -36,3 +41,11 @@ func _on_health_dead():
 	$AnimatedSprite2D.play("dead")
 	await $AnimatedSprite2D.animation_finished
 	queue_free()
+
+
+func _on_enemy_hurtbox_hit(damage: int):
+	var indicator = DAMAGE_INDICATOR.instantiate()
+	indicator.damage_number = damage
+	print(indicator.global_position)
+	indicator.global_position = $DamagePosition.global_position
+	get_tree().current_scene.add_child(indicator)
