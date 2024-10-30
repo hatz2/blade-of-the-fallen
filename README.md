@@ -1,6 +1,6 @@
 # Blade of the Fallen
 
-This is the first game that I have ever made. It is a small 2D game developed in Godot v4.2 for a college subject. The main goal of the project was to create a game with intelligent enemies. We had completely freedom over the characteristics of the game, the design, the AI methods and the art. The AI in my game was made using [Finite State Machines](https://en.wikipedia.org/wiki/Finite-state_machine) and the [State](https://gameprogrammingpatterns.com/state.html) design pattern.
+This is the first game that I have ever made. It is a small 2D game developed in [Godot v4.2](https://godotengine.org/) for a college subject. The main goal of the project was to create a game with intelligent enemies. We had completely freedom over the characteristics of the game, the design, the AI methods and the art. The AI in my game was made using [Finite State Machines](https://en.wikipedia.org/wiki/Finite-state_machine) and the [State](https://gameprogrammingpatterns.com/state.html) design pattern.
 
 ## Characteristics of the game
 
