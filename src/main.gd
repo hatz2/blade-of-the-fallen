@@ -7,10 +7,16 @@ var options_menu_caller = null
 
 func _ready():
 	_player_enabled(false)
+	Globals.background_music_sound_player.stream = preload("res://assets/sounds/music-loop-bundle-download_2024/Stream Loops 2024-03-30_02.ogg")
+	Globals.background_music_sound_player.play()
 
 func _on_main_menu_start_game():
 	# Add the first level scene
+	Globals.background_music_sound_player.stop()
+	Globals.background_music_sound_player.stream = preload("res://assets/sounds/music-loop-bundle-download_2024/Stream Loops 2024-05-01_01.ogg")
+	Globals.background_music_sound_player.play()
 	change_level("res://src/levels/initial_map/initial_map.tscn")
+	
 	
 	
 func change_level(level_path: String):

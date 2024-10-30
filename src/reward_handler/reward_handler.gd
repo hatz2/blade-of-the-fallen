@@ -26,7 +26,7 @@ func _ready():
 	var rewards: Array = [CHEST_SCRIPT.Reward.DAMAGE, CHEST_SCRIPT.Reward.HEALTH, CHEST_SCRIPT.Reward.COINS]
 	rewards.shuffle()
 	first_chest.reward_type = rewards[0]
-	first_chest.reward_type = rewards[1]
+	second_chest.reward_type = rewards[1]
 	
 	# Connect their open signal
 	first_chest.chest_opened.connect(on_reward_selected)
@@ -62,10 +62,18 @@ func on_reward_selected(reward: CHEST_SCRIPT.Reward):
 	second_chest.delete()
 		
 	# Apply the reward
+	match reward:
+		CHEST_SCRIPT.Reward.HEALTH:
+			PlayerInstance.health_reward()
+			
+		CHEST_SCRIPT.Reward.DAMAGE:
+			PlayerInstance.attack_reward()
+			
+		CHEST_SCRIPT.Reward.COINS:
+			PlayerInstance.coins_reward()
+			
 	print("Reward obtained", reward) 
 	
 	
-
-
 func _on_next_level_timer_timeout():
 	go_to_next_level.emit()

@@ -23,9 +23,6 @@ func _pause():
 func _resume():
 	get_tree().paused = false
 	$AnimationPlayer.play_backwards("appear")
-	
-func _quit():
-	pass
 
 func _on_resume_pressed():
 	_resume()
@@ -41,4 +38,4 @@ func _on_options_pressed():
 
 
 func _on_quit_pressed():
-	pass # Replace with function body.
+	get_tree().quit()

@@ -10,7 +10,7 @@ func _init():
 	collision_mask = 0
 
 func take_damage(attack: Attack):
-	if health:
+	if health.health > 0:
 		health.damage(attack)
 		hit.emit(attack.damage)
 		

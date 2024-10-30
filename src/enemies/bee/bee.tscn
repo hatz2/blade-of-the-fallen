@@ -164,8 +164,10 @@ shape = SubResource("RectangleShape2D_bmbdd")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_la1ah")
+MAX_HEALTH = 50
 
 [node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+visible = false
 offset_left = -12.0
 offset_top = -29.0
 offset_right = 408.0

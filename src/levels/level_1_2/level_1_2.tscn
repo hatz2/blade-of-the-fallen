@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://588vjdbw344b"]
+[gd_scene load_steps=12 format=3 uid="uid://588vjdbw344b"]
 
 [ext_resource type="TileSet" uid="uid://5p7yuwgixnnn" path="res://src/levels/level_tileset.tres" id="1_d54f5"]
 [ext_resource type="Script" path="res://src/levels/base_level.gd" id="2_mpke3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dfbus5ox1hv2b" path="res://src/coin/coin.tscn" id="4_wtlcd"]
 [ext_resource type="Script" path="res://src/fall_death_zone/fall_death_zone.gd" id="5_ao0ru"]
 [ext_resource type="PackedScene" uid="uid://dt3yy1x6frlbq" path="res://src/enemies/bee/bee.tscn" id="5_lp7aa"]
+[ext_resource type="PackedScene" uid="uid://vfc78wr2yvq1" path="res://src/reward_handler/reward_handler.tscn" id="8_ke4df"]
 [ext_resource type="PackedScene" uid="uid://lwdox3loupxq" path="res://src/enemies/boar/boar.tscn" id="20_bx6wn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64pxi"]
@@ -30,6 +31,7 @@ layer_3/name = "Vegetation"
 layer_3/tile_data = PackedInt32Array(-131080, 1114112, 10, -65544, 1114112, 11, -131079, 1179648, 10, -65543, 1179648, 11, -196614, 1245184, 9, -131078, 1245184, 10, -65542, 1245184, 11, -196613, 1310720, 9, -131077, 1310720, 10, -65541, 1310720, 11, -196612, 1376256, 9, -131076, 1376256, 10, -65540, 1376256, 11, -196611, 1441792, 9, -131075, 1441792, 10, -65539, 1441792, 11, -131074, 1507328, 10, -65538, 1507328, 11, -131073, 1572864, 10, -65537, 1572864, 11, -131053, 1441792, 17, 262153, 1441792, 17, 589839, 983040, 15, 983049, 1048576, 17, -131070, 1048576, 17, -65548, 1441792, 17, -131068, 1441792, 17, 2097131, 1441792, 17, 1900572, 1441792, 17, 1835047, 1441792, 17, 1441841, 1441792, 17, 1376307, 1114112, 4, 1441843, 1114112, 5, 1376308, 1179648, 4, 1441844, 1179648, 5, 1310773, 1245184, 3, 1376309, 1245184, 4, 1441845, 1245184, 5, 1310774, 1310720, 3, 1376310, 1310720, 4, 1441846, 1310720, 5, 1310775, 1376256, 3, 1376311, 1376256, 4, 1441847, 1376256, 5, 1310776, 1441792, 3, 1376312, 1441792, 4, 1441848, 1441792, 5, 1376313, 1507328, 4, 1441849, 1507328, 5, 1376314, 1572864, 4, 1441850, 1572864, 5, 2031598, 1114112, 1, 2097134, 1114112, 2, 2031599, 1179648, 1, 2097135, 1179648, 2, 1966064, 1245184, 0, 2031600, 1245184, 1, 2097136, 1245184, 2, 1966065, 1310720, 0, 2031601, 1310720, 1, 2097137, 1310720, 2, 1966066, 1376256, 0, 2031602, 1376256, 1, 2097138, 1376256, 2, 1966067, 1441792, 0, 2031603, 1441792, 1, 2097139, 1441792, 2, 2031604, 1507328, 1, 2097140, 1507328, 2, 2031605, 1572864, 1, 2097141, 1572864, 2, 2031613, 1310720, 15, 2097149, 1310720, 16, 2097150, 983040, 15, 2097148, 983040, 16, 2097144, 1441792, 17, 1835031, 983040, 17, 1900567, 983040, 18, 1900574, 983040, 16, 1835039, 1310720, 15, 1900575, 1310720, 16, 1572908, 1179648, 15, 1638444, 1179648, 16, 1572909, 1245184, 15, 1638445, 1245184, 16, 1572907, 1310720, 15, 1638443, 1310720, 16, 1376304, 983040, 17, 1441840, 983040, 18, 1376272, 1441792, 17, 2097128, 983040, 18, 2031592, 983040, 17)
 script = ExtResource("2_mpke3")
 player_initial_position = NodePath("PlayerInitialPos")
+next_scene_path = "res://src/levels/level_1_3/level_1_3.tscn"
 
 [node name="PlayerInitialPos" type="Marker2D" parent="."]
 position = Vector2(-194, -33)
@@ -96,3 +98,16 @@ shape = SubResource("RectangleShape2D_sunlm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bound2"]
 position = Vector2(1380, 318)
 shape = SubResource("RectangleShape2D_4lkeu")
+
+[node name="FirstChestPos" type="Marker2D" parent="."]
+position = Vector2(959, 351)
+
+[node name="SecondChestPos" type="Marker2D" parent="."]
+position = Vector2(1046, 351)
+
+[node name="RewardHandler" parent="." node_paths=PackedStringArray("first_chest_pos", "second_chest_pos") instance=ExtResource("8_ke4df")]
+first_chest_pos = NodePath("../FirstChestPos")
+second_chest_pos = NodePath("../SecondChestPos")
+
+[connection signal="level_completed" from="LevelCompleteDetector" to="RewardHandler" method="on_level_completed"]
+[connection signal="go_to_next_level" from="RewardHandler" to="." method="on_go_to_next_level"]

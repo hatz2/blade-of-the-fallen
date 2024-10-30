@@ -16,3 +16,8 @@ func damage(attack: Attack):
 	
 	if health <= 0:
 		dead.emit()
+		
+		
+func increase_current_health(increased_health: int):
+	var new_health = health + increased_health
+	health = min(MAX_HEALTH, new_health)

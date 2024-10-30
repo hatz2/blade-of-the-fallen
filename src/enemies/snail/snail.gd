@@ -37,6 +37,7 @@ func update_sprite_orientation():
 
 func _on_health_dead():
 	$StateMachine/Hide/Timer.stop()
+	$EnemyHurtbox/CollisionShape2D.disabled = true
 	$StateMachine.on_transition($StateMachine/Dead)
 	$AnimatedSprite2D.play("dead")
 	await $AnimatedSprite2D.animation_finished

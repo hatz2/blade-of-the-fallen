@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://goi4r2o8exgp"
+path="res://.godot/imported/66. The Final Battle.mp3-e48acebee19f18f378795eb859dfb805.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/66. The Final Battle.mp3"
+dest_files=["res://.godot/imported/66. The Final Battle.mp3-e48acebee19f18f378795eb859dfb805.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

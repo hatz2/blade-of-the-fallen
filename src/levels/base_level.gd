@@ -19,4 +19,6 @@ func _ready():
 	
 	# Set the player position
 	PlayerInstance.global_position = player_initial_position.global_position
-	#Events.update_player_position.emit(player_initial_position.global_position)
+	
+func on_go_to_next_level():
+	change_level.emit(next_scene_path)

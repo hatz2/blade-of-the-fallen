@@ -219,6 +219,7 @@ damage = 2
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("11_fc3ny")
+MAX_HEALTH = 70
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_fyg4p")
@@ -254,6 +255,7 @@ hitbox_coll_shape = NodePath("../../ConstantDmgHitbox/CollisionShape2D")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
 [node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+visible = false
 offset_left = -14.0
 offset_top = -26.0
 offset_right = 386.0
