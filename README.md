@@ -5,7 +5,7 @@ This is the first game that I have ever made. It is a small 2D game developed in
 ## Characteristics of the game
 
 * Platforms: PC (windows and linux)
-* Genre: 2D platformer and roguelike
+* Genre: 2D platformer and roguelite
 * Keyboard inputs
 * Intelligent enemies
 * UI: start menu, options menu, life and coins indicators
